@@ -3,8 +3,8 @@
 Este proyecto es un sistema web completo desarrollado para administrar los pedidos, pagos y entregas del comedor de la Universidad Nacional de la Patagonia Austral (Unidad Académica Caleta Olivia). 
 
 ## 🚀 Enlaces del Proyecto
-- **Frontend (Sitio Web):** [https://tu-enlace-de-netlify.netlify.app](https://tu-enlace-de-netlify.netlify.app)
-- **Backend (API):** [https://comedor-unpa-jptp.onrender.com/docs](https://comedor-unpa-jptp.onrender.com/docs)
+- **Frontend (Sitio Web):** [https://comedor-unpa.netlify.app/](https://comedor-unpa.netlify.app/)
+- **Backend (API):** [[https://comedor-unpa-jptp.onrender.com/docs](https://comedor-unpa-jptp.onrender.com)
 
 ## 🛠️ Tecnologías Utilizadas
 
