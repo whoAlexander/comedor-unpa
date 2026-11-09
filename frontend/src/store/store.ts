@@ -203,7 +203,7 @@ export interface MenuInput {
 }
 
 const activeReservationsFor = (menuId: string) =>
-  state.reservations.filter((r) => r.menuId === menuId && (r.status === "pendiente_pago" || r.status === "pagada"));
+  state.reservations.filter((r) => r?.menuId === menuId && (r.status === "pendiente_pago" || r.status === "pagada"));
 
 export function saveMenu(input: MenuInput, id?: string): Result<Menu> {
   if (!isServiceDay(input.date)) return fail("El comedor funciona de lunes a viernes: no se pueden cargar menús para sábados ni domingos.");
@@ -218,7 +218,7 @@ export function saveMenu(input: MenuInput, id?: string): Result<Menu> {
     const updated = { ...current, ...input };
     setState({
       menus: state.menus.map((m) => (m.id === id ? updated : m)),
-      reservations: state.reservations.map((r) => (r.menuId === id ? { ...r, menuName: updated.dish } : r)),
+      reservations: state.reservations.map((r) => (r?.menuId === id ? { ...r, menuName: updated.dish } : r)),
     });
     return ok(updated);
   }

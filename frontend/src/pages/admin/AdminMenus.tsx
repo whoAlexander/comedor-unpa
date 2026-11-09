@@ -36,7 +36,7 @@ export default function AdminMenus() {
   };
   const [from, to] = range[week];
   const menus = db.menus.filter((m) => m.date >= from && m.date <= to).sort((a, b) => a.date.localeCompare(b.date));
-  const reservationsFor = (id: string) => db.reservations.filter((r) => r.menuId === id && r.status !== "cancelada").length;
+  const reservationsFor = (id: string) => db.reservations.filter((r) => r?.menuId === id && r.status !== "cancelada").length;
 
   const openNew = () => {
     setEditing(null);

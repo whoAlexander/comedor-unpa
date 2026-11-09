@@ -32,7 +32,7 @@ export interface DayRow {
 const isCollected = (r: Reservation) => r.status === "pagada" || r.status === "entregada";
 
 export function buildReport({ users, menus, reservations, stock, from, to }: ReportInput) {
-  const userOf = (id: string) => users.find((u) => u.id === id);
+  const userOf = (id: string) => users.find((u) => u?.id === id);
   const inRange = reservations.filter((r) => r.date >= from && r.date <= to);
   const active = inRange.filter((r) => r.status !== "cancelada");
   const collected = inRange.filter(isCollected);
@@ -84,10 +84,10 @@ export function buildReport({ users, menus, reservations, stock, from, to }: Rep
 
   const menuCounts = new Map<string, { dish: string; date: string; count: number }>();
   for (const r of active) {
-    const m = menus.find((x) => x.id === r.menuId);
-    const entry = menuCounts.get(r.menuId) ?? { dish: m?.dish ?? r.menuName, date: r.date, count: 0 };
+    const m = menus.find((x) => x?.id === r?.menuId);
+    const entry = menuCounts.get(r?.menuId) ?? { dish: m?.dish ?? r.menuName, date: r.date, count: 0 };
     entry.count++;
-    menuCounts.set(r.menuId, entry);
+    menuCounts.set(r?.menuId, entry);
   }
   const topMenus = [...menuCounts.values()].sort((a, b) => b.count - a.count || a.date.localeCompare(b.date)).slice(0, 5);
 

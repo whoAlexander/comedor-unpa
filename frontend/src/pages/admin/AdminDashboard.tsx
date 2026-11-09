@@ -19,7 +19,7 @@ export default function AdminDashboard() {
   const toDeliverToday = toDeliver.filter((r) => r.date === today);
   const inReview = pending.filter((r) => r.payment.status === "en_revision");
   const todayMenu = db.menus.find((m) => m.date === today);
-  const userOf = (id: string) => db.users.find((u) => u.id === id)!;
+  const userOf = (id: string) => db.users.find((u) => u?.id === id)!;
 
   return (
     <div>
@@ -55,7 +55,7 @@ export default function AdminDashboard() {
               {inReview.map((r) => {
                 const u = userOf(r.userId);
                 return (
-                  <li key={r.id} className="flex flex-wrap items-center justify-between gap-2 py-3" data-testid={`admin-review-item-${r.id}`}>
+                  <li key={r?.id} className="flex flex-wrap items-center justify-between gap-2 py-3" data-testid={`admin-review-item-${r?.id}`}>
                     <div>
                       <p className="font-medium">{u.name}</p>
                       <p className="text-xs text-muted-foreground">{ROLE_LABELS[u.role]} · {formatDateShort(r.date)}</p>
