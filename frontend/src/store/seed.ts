@@ -85,7 +85,7 @@ export function createSeed(today: string) {
       price: priceFor(users[userId].role, withContainer),
       status,
       payment,
-      createdAt: new Date(`${addDays(date, -1)}T10:${String(10 + seq).padStart(2, "0")}:00-03:00`).toISOString(),
+      createdAt: addDays(date, -1) ? new Date(`${addDays(date, -1)}T10:${String(10 + seq).padStart(2, "0")}:00-03:00`).toISOString() : new Date().toISOString(),
       ...extra,
     };
   };
@@ -93,7 +93,7 @@ export function createSeed(today: string) {
     status: "aprobado",
     proof: proof(`comprobante_${op}.pdf`, users[userId].name, amount, addDays(date, -1), "11:05", op),
   });
-  const deliveredAt = (date: string, time: string) => new Date(`${date}T${time}:00-03:00`).toISOString();
+ const deliveredAt = (date: string, time: string) => (date && time) ? new Date(`${date}T${time}:00-03:00`).toISOString() : new Date().toISOString();
   const T = todayServing;
 
   const reservations: Reservation[] = [
