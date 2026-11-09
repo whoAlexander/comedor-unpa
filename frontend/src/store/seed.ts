@@ -37,7 +37,7 @@ const proof = (fileName: string, payer: string, amount: number, date: string, ti
   fileName,
   mimeType: "simulado",
   simulated: { bank: "Banco Santa Cruz", operation, payer, amount, date, time },
-  uploadedAt: new Date(`${date}T${time}:00-03:00`).toISOString(),
+  uploadedAt: (date && time) ? new Date(`${date}T${time}:00-03:00`).toISOString() : "",
 });
 
 export function createSeed(today: string) {
