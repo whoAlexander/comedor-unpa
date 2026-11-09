@@ -56,7 +56,7 @@ export default function AdminPayments() {
   const pending = db.reservations.filter((r) => r.status === "pendiente_pago");
   const rows = pending
     .filter((r) => filter === "todas" || r.payment.status === filter)
-    .sort((a, b) => Number(b.payment.status === "en_revision") - Number(a.payment.status === "en_revision") || a.date.localeCompare(b.date));
+    .sort((a, b) => Number(b.payment.status === "en_revision") - Number(a.payment.status === "en_revision") || (a.date || "").localeCompare(b.date || ""));
 
   const openReject = (r: Reservation) => {
     setReason("");

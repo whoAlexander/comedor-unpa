@@ -148,7 +148,7 @@ export default function Payments() {
   const user = useCurrentUser()!;
   const [params] = useSearchParams();
   const focus = params.get("reserva");
-  const pending = db.reservations.filter((r) => r.userId === user.id && r.status === "pendiente_pago").sort((a, b) => a.date.localeCompare(b.date));
+  const pending = db.reservations.filter((r) => r.userId === user.id && r.status === "pendiente_pago").sort((a, b) => (a.date || "").localeCompare(b.date || ""));
 
   return (
     <div>

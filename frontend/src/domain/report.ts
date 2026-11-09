@@ -89,7 +89,7 @@ export function buildReport({ users, menus, reservations, stock, from, to }: Rep
     entry.count++;
     menuCounts.set(r?.menuId, entry);
   }
-  const topMenus = [...menuCounts.values()].sort((a, b) => b.count - a.count || a.date.localeCompare(b.date)).slice(0, 5);
+  const topMenus = [...menuCounts.values()].sort((a, b) => b.count - a.count || (a.date || "").localeCompare(b.date || "")).slice(0, 5);
 
   const roleCounts = (["estudiante", "docente"] as const).map((role) => ({
     label: ROLE_LABELS[role],

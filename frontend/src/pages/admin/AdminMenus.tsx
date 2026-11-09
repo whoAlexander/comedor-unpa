@@ -35,7 +35,7 @@ export default function AdminMenus() {
     todos: ["0000-00-00", "9999-99-99"],
   };
   const [from, to] = range[week];
-  const menus = db.menus.filter((m) => m.date >= from && m.date <= to).sort((a, b) => a.date.localeCompare(b.date));
+  const menus = db.menus.filter((m) => m.date >= from && m.date <= to).sort((a, b) => (a.date || "").localeCompare(b.date || ""));
   const reservationsFor = (id: string) => db.reservations.filter((r) => r?.menuId === id && r.status !== "cancelada").length;
 
   const openNew = () => {
@@ -46,7 +46,7 @@ export default function AdminMenus() {
   };
   const openEdit = (m: Menu) => {
     setEditing(m);
-    setForm({ date: m.date, dish: m.dish, description: m.description, available: m.available });
+    setForm({ date: m.date, dish: m?.dish, description: m.description, available: m.available });
     setErrors({});
     setFormOpen(true);
   };
@@ -127,7 +127,7 @@ export default function AdminMenus() {
                 {menus.map((m) => (
                   <TableRow key={m.id} className={m.date === today ? "bg-secondary/50" : undefined} data-testid={`admin-menu-row-${m.id}`}>
                     <TableCell className="whitespace-nowrap font-medium">{formatDateShort(m.date)}{m.date === today && <span className="ml-2 text-xs text-primary">Hoy</span>}</TableCell>
-                    <TableCell className="font-semibold" data-testid={`admin-menu-${m.id}-dish`}>{m.dish}</TableCell>
+                    <TableCell className="font-semibold" data-testid={`admin-menu-${m.id}-dish`}>{m?.dish}</TableCell>
                     <TableCell className="max-w-72 whitespace-normal text-sm text-muted-foreground">{m.description}</TableCell>
                     <TableCell>{availability(m)}</TableCell>
                     <TableCell className="text-right font-mono">{reservationsFor(m.id)}</TableCell>
@@ -168,8 +168,8 @@ export default function AdminMenus() {
             </div>
             <div className="space-y-2">
               <Label htmlFor="menu-dish">Plato principal</Label>
-              <Input id="menu-dish" value={form.dish} onChange={(e) => setForm({ ...form, dish: e.target.value })} placeholder="Ej.: Guiso de lentejas" aria-invalid={Boolean(errors.dish)} data-testid="admin-menu-dish-input" />
-              {errors.dish && <p className="text-sm text-destructive" data-testid="admin-menu-dish-error">{errors.dish}</p>}
+              <Input id="menu-dish" value={form?.dish} onChange={(e) => setForm({ ...form, dish: e.target.value })} placeholder="Ej.: Guiso de lentejas" aria-invalid={Boolean(errors?.dish)} data-testid="admin-menu-dish-input" />
+              {errors?.dish && <p className="text-sm text-destructive" data-testid="admin-menu-dish-error">{errors?.dish}</p>}
             </div>
             <div className="space-y-2">
               <Label htmlFor="menu-desc">Descripción</Label>
@@ -201,7 +201,7 @@ export default function AdminMenus() {
         <DialogContent data-testid="admin-menu-delete-dialog">
           <DialogHeader>
             <DialogTitle>¿Eliminar menú?</DialogTitle>
-            <DialogDescription>{deleting && `${deleting.dish} · ${formatDateLong(deleting.date)}. No se puede eliminar si tiene reservas activas.`}</DialogDescription>
+            <DialogDescription>{deleting && `${deleting?.dish} · ${formatDateLong(deleting.date)}. No se puede eliminar si tiene reservas activas.`}</DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <Button variant="outline" onClick={() => setDeleting(null)} data-testid="admin-menu-delete-cancel-button">Volver</Button>

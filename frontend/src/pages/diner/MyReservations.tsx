@@ -26,7 +26,7 @@ export default function MyReservations() {
   const mine = db.reservations
     .filter((r) => r.userId === user.id)
     .filter((r) => (filter === "todas" ? true : filter === "activas" ? r.status === "pendiente_pago" || r.status === "pagada" : r.status === "entregada" || r.status === "cancelada"))
-    .sort((a, b) => b.date.localeCompare(a.date));
+    .sort((a, b) => (b.date || "").localeCompare(a.date || ""));
 
   const doCancel = () => {
     if (!cancelFor) return;

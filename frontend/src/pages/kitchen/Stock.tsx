@@ -49,7 +49,7 @@ export default function Stock() {
   const db = useDb();
   const [form, setForm] = useState(EMPTY);
   const [errors, setErrors] = useState<Partial<Record<keyof typeof EMPTY | "general", string>>>({});
-  const items = [...db.stock].sort((a, b) => Number(isLow(b)) - Number(isLow(a)) || a.name.localeCompare(b.name));
+  const items = [...db.stock].sort((a, b) => Number(isLow(b)) - Number(isLow(a)) || (a.name || "").localeCompare(b.name || ""));
   const low = db.stock.filter(isLow);
 
   const submit = (e: FormEvent) => {
