@@ -40,7 +40,11 @@ export const isBeforeCutoff = (now: ArgentinaNow) => now.hour < CUTOFF_HOUR;
 const toDate = (iso: string) => new Date(`${iso}T12:00:00Z`);
 
 export function addDays(iso: string, n: number) {
+  if (!iso) return ""; // <-- Escudo protector: si no hay fecha, no hace nada
+  
   const d = toDate(iso);
+  if (isNaN(d.getTime())) return ""; // <-- Segundo escudo por si la fecha es inválida
+  
   d.setUTCDate(d.getUTCDate() + n);
   return d.toISOString().slice(0, 10);
 }
