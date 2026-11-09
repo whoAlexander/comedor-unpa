@@ -48,7 +48,7 @@ export function MenuCard({ menu, prices, isToday, badge, size = "sm", testid }: 
           {badge}
         </div>
         <h3 className={cn("mt-1 font-heading font-semibold leading-snug tracking-tight", size === "lg" ? "text-2xl" : "text-lg")} data-testid={`${testid}-dish`}>
-          {menu.dish}
+          {menu?.dish}
         </h3>
         <p className="mt-1 text-sm text-muted-foreground">{menu.description}</p>
         <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1">
