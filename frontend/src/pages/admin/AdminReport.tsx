@@ -75,7 +75,7 @@ export default function AdminReport() {
     const header = ["Fecha", "Comensal", "DNI", "Tipo", "Recipiente", "Menú", "Importe", "Estado", "Estado del pago", "Código"];
     const lines = report.rows.map((r) => {
       const u = userOf(r.userId);
-      return [r.date, u?.name ?? "", u?.dni ?? "", u ? ROLE_LABELS[u.role] : "", r.withContainer ? "Propio" : "Descartable", r.menuName, String(r.price), STATUS_LABELS[r.status], PAYMENT_TEXT[r.payment.status], r.code];
+      return [r.date, u?.name ?? "", u?.dni ?? "", u ? ROLE_LABELS[u.role] : "", r.withContainer ? "Propio" : "Descartable", r?.menuName, String(r.price), STATUS_LABELS[r.status], PAYMENT_TEXT[r.payment.status], r.code];
     });
     const csv = [header, ...lines].map((row) => row.map((c) => `"${c.replace(/"/g, '""')}"`).join(";")).join("\r\n");
     const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8" });
@@ -214,9 +214,9 @@ export default function AdminReport() {
               <h2 className="mb-4 font-heading text-lg font-semibold">Menús más reservados</h2>
               <ol className="space-y-2.5">
                 {report.topMenus.map((m, i) => (
-                  <li key={`${m.dish}-${m.date}`} className="flex items-start gap-3 text-sm">
+                  <li key={`${m?.dish}-${m.date}`} className="flex items-start gap-3 text-sm">
                     <span className="inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-brand-soft font-mono text-xs font-bold text-brand-soft-foreground">{i + 1}</span>
-                    <span className="flex-1"><span className="block font-medium">{m.dish}</span><span className="text-xs text-muted-foreground">{formatDateShort(m.date)}</span></span>
+                    <span className="flex-1"><span className="block font-medium">{m?.dish}</span><span className="text-xs text-muted-foreground">{formatDateShort(m.date)}</span></span>
                     <span className="font-mono font-semibold">{m.count}</span>
                   </li>
                 ))}

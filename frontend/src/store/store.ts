@@ -134,7 +134,7 @@ export function createReservation(user: User, withContainer: boolean): Result<Re
     userId: user.id,
     date: el.targetDate,
     menuId: el.menu.id,
-    menuName: el.menu.dish,
+    menuName: el.menu?.dish,
     withContainer: keepContainer,
     price: priceFor(user.role, keepContainer),
     status: "pendiente_pago",
@@ -218,7 +218,7 @@ export function saveMenu(input: MenuInput, id?: string): Result<Menu> {
     const updated = { ...current, ...input };
     setState({
       menus: state.menus.map((m) => (m.id === id ? updated : m)),
-      reservations: state.reservations.map((r) => (r?.menuId === id ? { ...r, menuName: updated.dish } : r)),
+      reservations: state.reservations.map((r) => (r?.menuId === id ? { ...r, menuName: updated?.dish } : r)),
     });
     return ok(updated);
   }

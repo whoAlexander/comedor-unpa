@@ -120,7 +120,7 @@ export default function Scanner() {
                     <div><dt className="text-muted-foreground">DNI</dt><dd className="font-mono">{result.user?.dni}</dd></div>
                     <div><dt className="text-muted-foreground">Código</dt><dd className="font-mono">{result.reservation.code}</dd></div>
                     <div><dt className="text-muted-foreground">Fecha</dt><dd>{formatDateLong(result.reservation.date)}</dd></div>
-                    <div><dt className="text-muted-foreground">Menú</dt><dd>{result.reservation.menuName}</dd></div>
+                    <div><dt className="text-muted-foreground">Menú</dt><dd>{result.reservation?.menuName}</dd></div>
                     <div><dt className="text-muted-foreground">Importe</dt><dd className="font-mono">{formatARS(result.reservation.price)}</dd></div>
                     <div><dt className="text-muted-foreground">Recipiente</dt><dd>{result.reservation.withContainer ? "Trae recipiente" : "Descartable"}</dd></div>
                     <div className="col-span-2 flex flex-wrap items-center gap-2"><dt className="text-muted-foreground">Estado actual:</dt><dd><StatusBadge reservation={result.reservation} testid="scanner-info-status" /></dd></div>

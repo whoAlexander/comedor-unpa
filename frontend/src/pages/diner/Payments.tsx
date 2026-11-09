@@ -69,7 +69,7 @@ function ProofUploader({ reservation, highlighted }: { reservation: Reservation;
         <div>
           <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Fecha de la reserva</p>
           <p className="font-heading text-lg font-semibold" data-testid={`payment-card-${reservation.id}-date`}>{formatDateLong(reservation.date)}</p>
-          <p className="text-sm text-muted-foreground">{reservation.menuName}</p>
+          <p className="text-sm text-muted-foreground">{reservation?.menuName}</p>
         </div>
         <div className="text-right">
           <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Importe a pagar</p>

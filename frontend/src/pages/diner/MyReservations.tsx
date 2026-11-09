@@ -67,7 +67,7 @@ export default function MyReservations() {
                   </div>
                   <div className="min-w-0 flex-1">
                     <p className="text-xs text-muted-foreground" data-testid={`reservation-card-${r.id}-date`}>{formatDateLong(r.date)}</p>
-                    <h3 className="font-heading text-lg font-semibold leading-snug" data-testid={`reservation-card-${r.id}-menu`}>{r.menuName}</h3>
+                    <h3 className="font-heading text-lg font-semibold leading-snug" data-testid={`reservation-card-${r.id}-menu`}>{r?.menuName}</h3>
                     <p className="mt-0.5 font-mono font-bold text-primary" data-testid={`reservation-card-${r.id}-price`}>
                       {formatARS(r.price)}
                       {user.role === "docente" && <span className="ml-2 font-sans text-xs font-normal text-muted-foreground">{r.withContainer ? "con recipiente" : "sin recipiente"}</span>}
@@ -130,7 +130,7 @@ export default function MyReservations() {
         <DialogContent data-testid="qr-dialog">
           <DialogHeader>
             <DialogTitle className="font-heading text-xl">Tu código de retiro</DialogTitle>
-            <DialogDescription>{qrFor && `${formatDateLong(qrFor.date)} · ${qrFor.menuName}`}</DialogDescription>
+            <DialogDescription>{qrFor && `${formatDateLong(qrFor.date)} · ${qrFor?.menuName}`}</DialogDescription>
           </DialogHeader>
           {qrFor && (
             <div className="flex flex-col items-center gap-3 py-2 animate-pop-in">

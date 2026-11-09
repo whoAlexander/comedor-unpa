@@ -85,7 +85,7 @@ export function buildReport({ users, menus, reservations, stock, from, to }: Rep
   const menuCounts = new Map<string, { dish: string; date: string; count: number }>();
   for (const r of active) {
     const m = menus.find((x) => x?.id === r?.menuId);
-    const entry = menuCounts.get(r?.menuId) ?? { dish: m?.dish ?? r.menuName, date: r.date, count: 0 };
+    const entry = menuCounts.get(r?.menuId) ?? { dish: m?.dish ?? r?.menuName, date: r.date, count: 0 };
     entry.count++;
     menuCounts.set(r?.menuId, entry);
   }

@@ -80,7 +80,7 @@ export function createSeed(today: string) {
       userId,
       date,
       menuId: menu?.id,
-      menuName: menu.dish,
+      menuName: menu?.dish,
       withContainer,
       price: priceFor(users[userId].role, withContainer),
       status,
