@@ -92,9 +92,38 @@ const dateTimeFmt = new Intl.DateTimeFormat("es-AR", {
 
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
-export const formatDateLong = (iso: string) => capitalize(longFmt.format(toDate(iso)));
-export const formatDateShort = (iso: string) => capitalize(shortFmt.format(toDate(iso)).replace(",", ""));
-export const formatWeekday = (iso: string) => capitalize(weekdayFmt.format(toDate(iso)).replace(".", ""));
-export const dayNumber = (iso: string) => String(toDate(iso).getUTCDate());
-export const formatTime = (isoDateTime: string) => timeFmt.format(new Date(isoDateTime));
-export const formatDateTime = (isoDateTime: string) => dateTimeFmt.format(new Date(isoDateTime));
+export const formatDateLong = (iso: string) => {
+  if (!iso) return "Sin fecha";
+  const d = toDate(iso);
+  return isNaN(d.getTime()) ? "Sin fecha" : capitalize(longFmt.format(d));
+};
+
+export const formatDateShort = (iso: string) => {
+  if (!iso) return "Sin fecha";
+  const d = toDate(iso);
+  return isNaN(d.getTime()) ? "Sin fecha" : capitalize(shortFmt.format(d).replace(",", ""));
+};
+
+export const formatWeekday = (iso: string) => {
+  if (!iso) return "";
+  const d = toDate(iso);
+  return isNaN(d.getTime()) ? "" : capitalize(weekdayFmt.format(d).replace(".", ""));
+};
+
+export const dayNumber = (iso: string) => {
+  if (!iso) return "";
+  const d = toDate(iso);
+  return isNaN(d.getTime()) ? "" : String(d.getUTCDate());
+};
+
+export const formatTime = (isoDateTime: string) => {
+  if (!isoDateTime) return "Sin hora";
+  const d = new Date(isoDateTime);
+  return isNaN(d.getTime()) ? "Sin hora" : timeFmt.format(d);
+};
+
+export const formatDateTime = (isoDateTime: string) => {
+  if (!isoDateTime) return "Sin fecha";
+  const d = new Date(isoDateTime);
+  return isNaN(d.getTime()) ? "Sin fecha" : dateTimeFmt.format(d);
+};
